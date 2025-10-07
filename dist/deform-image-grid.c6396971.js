@@ -908,7 +908,7 @@ new (0, _p5Default.default)((sk)=>{
     };
 });
 
-},{"p5":"6IEby","./settings.js":"6zYs7","./utils.js":"1X9hu","@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT","url:../assets/image-array/abstract-01.jpg":"hn0ap","url:../assets/image-array/abstract-02.jpg":"bEKyJ","url:../assets/image-array/abstract-03.jpg":"6XuPS","url:../assets/image-array/abstract-04.jpg":"aotHG","url:../assets/image-array/abstract-05.jpg":"jY7SP","url:../assets/image-array/abstract-06.jpg":"XwG9J","url:../assets/image-array/abstract-07.jpg":"1GPTA","url:../assets/image-array/abstract-08.jpg":"bESjc","url:../assets/image-array/abstract-09.jpg":"lvONI","url:../assets/image-array/abstract-10.jpg":"dudi6","url:../assets/image-array/abstract-11.jpg":"iZzUX","url:../assets/image-array/abstract-12.jpg":"fPsYt"}],"6IEby":[function(require,module,exports,__globalThis) {
+},{"p5":"6IEby","./settings.js":"6zYs7","./utils.js":"1X9hu","url:../assets/image-array/abstract-01.jpg":"hn0ap","url:../assets/image-array/abstract-02.jpg":"bEKyJ","url:../assets/image-array/abstract-03.jpg":"6XuPS","url:../assets/image-array/abstract-04.jpg":"aotHG","url:../assets/image-array/abstract-05.jpg":"jY7SP","url:../assets/image-array/abstract-06.jpg":"XwG9J","url:../assets/image-array/abstract-07.jpg":"1GPTA","url:../assets/image-array/abstract-08.jpg":"bESjc","url:../assets/image-array/abstract-09.jpg":"lvONI","url:../assets/image-array/abstract-10.jpg":"dudi6","url:../assets/image-array/abstract-11.jpg":"iZzUX","url:../assets/image-array/abstract-12.jpg":"fPsYt","@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT"}],"6IEby":[function(require,module,exports,__globalThis) {
 /*! p5.js v1.11.10 August 23, 2025 */ var global = arguments[3];
 !function(e1) {
     module.exports = e1();
@@ -33568,8 +33568,18 @@ function handleClear() {
     if (onClear) onClear();
 }
 function handleImageUpload(e) {
-    const file = e.target.files[0];
-    if (file) loadImageFromFile(file);
+    const files = Array.from(e.target.files);
+    if (files.length > 0) {
+        const repeatInput = document.getElementById("repeat-input");
+        const repeatCount = repeatInput ? parseInt(repeatInput.value) : 1;
+        // Process each file
+        files.forEach((file)=>{
+            // Add each image the specified number of times
+            for(let i = 0; i < repeatCount; i++)loadImageFromFile(file);
+        });
+        // Reset the file input so the same file can be selected again
+        e.target.value = "";
+    }
 }
 function setCurrentCols(cols) {
     currentCols = cols;

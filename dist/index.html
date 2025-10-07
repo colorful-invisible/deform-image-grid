@@ -23,12 +23,19 @@
       </div>
 
       <div class="panel-section">
-        <h3 class="section-title">Upload Image</h3>
+        <h3 class="section-title">Upload Images</h3>
         <div class="input-group">
-          <input type="file" id="image-upload-input" accept="image/*">
+          <input type="file" id="image-upload-input" accept="image/*" multiple="">
           <p class="hint-text">
-            Add your own images to the grid (JPG, PNG, etc.)
+            Select one or multiple images (JPG, PNG, etc.)
           </p>
+        </div>
+        <div class="input-group">
+          <label for="repeat-input" class="layout-setting-label">
+            Repeat Count
+          </label>
+          <input type="number" id="repeat-input" min="1" max="20" value="1" class="message-textarea">
+          <p class="hint-text">How many times to add each selected image</p>
         </div>
       </div>
 

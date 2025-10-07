@@ -96,9 +96,21 @@ function handleClear() {
 }
 
 function handleImageUpload(e) {
-  const file = e.target.files[0];
-  if (file) {
-    loadImageFromFile(file);
+  const files = Array.from(e.target.files);
+  if (files.length > 0) {
+    const repeatInput = document.getElementById("repeat-input");
+    const repeatCount = repeatInput ? parseInt(repeatInput.value) : 1;
+
+    // Process each file
+    files.forEach((file) => {
+      // Add each image the specified number of times
+      for (let i = 0; i < repeatCount; i++) {
+        loadImageFromFile(file);
+      }
+    });
+
+    // Reset the file input so the same file can be selected again
+    e.target.value = "";
   }
 }
 

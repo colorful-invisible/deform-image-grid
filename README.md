@@ -11,10 +11,12 @@ This project creates a dynamic image display where bitmap images are arranged in
 ## Features
 
 - **Grid-based image deformation**: Drag handles to warp and distort images
-- **11 built-in abstract images**: Pre-loaded colorful abstract artwork
+- **12 built-in abstract images**: Pre-loaded colorful abstract artwork
 - **Image shuffling**: Randomize the order of images in the grid
-- **Custom image upload**: Add your own images (JPG, PNG, etc.)
-- **Adjustable columns**: Change grid layout from 2-6 columns
+- **Batch image upload**: Select and upload multiple images at once
+- **Image repetition**: Add the same image multiple times in sequence
+- **Clear all images**: Remove all images to start fresh
+- **Adjustable columns**: Change grid layout from 2-12 columns
 - **Theme toggle**: Switch between light and dark backgrounds
 - **High-res export**: Save snapshots as PNG files
 
@@ -28,5 +30,9 @@ This project creates a dynamic image display where bitmap images are arranged in
 ## Settings Panel
 
 - **Shuffle Images**: Randomly reorder images in the grid
-- **Upload Image**: Add your own images to the grid
-- **Columns**: Adjust the number of columns.
+- **Clear All Images**: Remove all images from the grid
+- **Upload Images**:
+  - Select one or multiple images to add to the grid
+  - Use "Repeat Count" to add each selected image multiple times (1-20x)
+  - Perfect for creating patterns or emphasizing certain images
+- **Columns**: Adjust the number of columns (2-12)
