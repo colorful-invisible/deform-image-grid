@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./styles/style.css" />
+    <link rel="stylesheet" href="./styles/settings.css" />
+    <title>Deform Images</title>
+  </head>
+  <body>
+    <main></main>
+
+    <!-- Settings Panel -->
+    <div id="settings-panel" class="side-panel">
+      <h2 class="panel-title">Settings</h2>
+
+      <div class="panel-section">
+        <h3 class="section-title">Image Controls</h3>
+        <div class="input-group">
+          <button id="shuffle-button" class="action-button">
+            Shuffle Images
+          </button>
+          <p class="hint-text">Randomly reorder the images in the grid</p>
+        </div>
+      </div>
+
+      <div class="panel-section">
+        <h3 class="section-title">Upload Image</h3>
+        <div class="input-group">
+          <input type="file" id="image-upload-input" accept="image/*" />
+          <p class="hint-text">
+            Add your own images to the grid (JPG, PNG, etc.)
+          </p>
+        </div>
+      </div>
+
+      <div class="panel-section">
+        <h3 class="section-title">Layout Settings</h3>
+        <div class="input-group">
+          <label for="cols-input" class="layout-setting-label"> Columns </label>
+          <input
+            type="number"
+            id="cols-input"
+            min="2"
+            max="12"
+            value="4"
+            class="message-textarea"
+          />
+        </div>
+      </div>
+
+      <div class="panel-section">
+        <h3 class="section-title">Danger Zone</h3>
+
+        <div class="input-group">
+          <button id="clear-button" class="action-button action-button-danger">
+            Clear All Images
+          </button>
+          <p class="hint-text">Remove all images from the grid</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Settings Trigger -->
+    <button id="settings-trigger" class="panel-toggle">
+      <img src="./assets/images/gear.svg" alt="Settings" />
+    </button>
+
+    <script type="module" src="./scripts/index.js"></script>
+  </body>
+</html>
