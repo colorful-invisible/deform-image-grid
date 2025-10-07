@@ -32,7 +32,7 @@ new p5((sk) => {
 
   let cols = getCurrentCols();
   let rows = 0; // Will be set after images load
-  let isLightTheme = false;
+  let showHandles = true;
   const handleSize = 24;
 
   // Store image paths
@@ -128,7 +128,7 @@ new p5((sk) => {
   };
 
   sk.draw = () => {
-    sk.background(isLightTheme ? 255 : 36);
+    sk.background(36);
 
     // Draw textured quads with images
     sk.noStroke();
@@ -136,7 +136,6 @@ new p5((sk) => {
     for (let row = 0; row < rows; row++) {
       for (let col = 0; col < cols; col++) {
         if (imageIndex < imageArray.length) {
-          // Apply tint based on theme (Option B: scale to cover, may distort slightly)
           sk.tint(255);
           sk.texture(imageArray[imageIndex]);
           const topLeft = gridVertices[col][row];
@@ -158,29 +157,33 @@ new p5((sk) => {
       }
     }
 
-    // Draw handles
-    sk.fill(0);
-    const pulseValue = pulse(sk, 12, 18, 2);
-    for (let col = 1; col < cols; col++) {
-      for (let row = 1; row < rows; row++) {
-        const vertex = gridVertices[col][row];
-        sk.ellipse(vertex.x, vertex.y, pulseValue, pulseValue);
+    // Draw handles only if showHandles is true
+    if (showHandles) {
+      sk.fill(0);
+      const pulseValue = pulse(sk, 12, 18, 2);
+      for (let col = 1; col < cols; col++) {
+        for (let row = 1; row < rows; row++) {
+          const vertex = gridVertices[col][row];
+          sk.ellipse(vertex.x, vertex.y, pulseValue, pulseValue);
+        }
       }
     }
 
-    // Update hovered handle
+    // Update hovered handle (only when handles are visible)
     hoveredHandle = null;
-    const mouseX = sk.mouseX - sk.width / 2;
-    const mouseY = sk.mouseY - sk.height / 2;
-    for (let col = 1; col < cols; col++) {
-      for (let row = 1; row < rows; row++) {
-        const vertex = gridVertices[col][row];
-        if (sk.dist(mouseX, mouseY, vertex.x, vertex.y) < handleSize) {
-          hoveredHandle = { col, row };
-          break;
+    if (showHandles) {
+      const mouseX = sk.mouseX - sk.width / 2;
+      const mouseY = sk.mouseY - sk.height / 2;
+      for (let col = 1; col < cols; col++) {
+        for (let row = 1; row < rows; row++) {
+          const vertex = gridVertices[col][row];
+          if (sk.dist(mouseX, mouseY, vertex.x, vertex.y) < handleSize) {
+            hoveredHandle = { col, row };
+            break;
+          }
         }
+        if (hoveredHandle) break;
       }
-      if (hoveredHandle) break;
     }
 
     // Update cursor
@@ -219,7 +222,7 @@ new p5((sk) => {
 
   sk.keyPressed = () => {
     if (sk.key === "h" || sk.key === "H") {
-      isLightTheme = !isLightTheme;
+      showHandles = !showHandles;
     }
     if (sk.key === "s" || sk.key === "S") {
       saveSnapshot(sk, defaultDensity, 2);

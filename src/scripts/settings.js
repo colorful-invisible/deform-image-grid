@@ -8,6 +8,7 @@ let panel = null;
 let colsInput = null;
 let shuffleButton = null;
 let clearButton = null;
+let uploadButton = null;
 let imageUploadInput = null;
 let isOpen = false;
 
@@ -21,6 +22,7 @@ function setupEventListeners() {
   colsInput = document.getElementById("cols-input");
   shuffleButton = document.getElementById("shuffle-button");
   clearButton = document.getElementById("clear-button");
+  uploadButton = document.getElementById("upload-button");
   imageUploadInput = document.getElementById("image-upload-input");
 
   const trigger = document.getElementById("settings-trigger");
@@ -43,6 +45,11 @@ function setupEventListeners() {
   // Clear button
   if (clearButton) {
     clearButton.addEventListener("click", handleClear);
+  }
+
+  // Upload button
+  if (uploadButton) {
+    uploadButton.addEventListener("click", handleUploadButtonClick);
   }
 
   // Image upload input
@@ -92,6 +99,12 @@ function handleShuffle() {
 function handleClear() {
   if (onClear) {
     onClear();
+  }
+}
+
+function handleUploadButtonClick() {
+  if (imageUploadInput) {
+    imageUploadInput.click();
   }
 }
 

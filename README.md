@@ -17,13 +17,13 @@ This project creates a dynamic image display where bitmap images are arranged in
 - **Image repetition**: Add the same image multiple times in sequence
 - **Clear all images**: Remove all images to start fresh
 - **Adjustable columns**: Change grid layout from 2-12 columns
-- **Theme toggle**: Switch between light and dark backgrounds
+- **Toggle handles**: Show/hide deformation handles for clean screenshots
 - **High-res export**: Save snapshots as PNG files
 
 ## Usage
 
 - **Drag handles**: Click and drag the pulsing circular handles to deform the image grid.
-- **Toggle theme**: Press `H` to switch between light and dark themes.
+- **Toggle handles**: Press `H` to show/hide the deformation handles (perfect for clean screenshots).
 - **Save snapshot**: Press `S` to save a high-resolution PNG image of the current deformation.
 - **Open settings**: Click the gear icon to access the settings panel.
 
@@ -32,7 +32,7 @@ This project creates a dynamic image display where bitmap images are arranged in
 - **Shuffle Images**: Randomly reorder images in the grid
 - **Clear All Images**: Remove all images from the grid
 - **Upload Images**:
-  - Select one or multiple images to add to the grid
+  - Click "Choose Images" to select one or multiple images to add to the grid
   - Use "Repeat Count" to add each selected image multiple times (1-20x)
   - Perfect for creating patterns or emphasizing certain images
 - **Columns**: Adjust the number of columns (2-12)

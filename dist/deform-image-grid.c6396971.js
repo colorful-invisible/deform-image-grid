@@ -752,7 +752,7 @@ new (0, _p5Default.default)((sk)=>{
     let defaultDensity;
     let cols = (0, _settingsJs.getCurrentCols)();
     let rows = 0; // Will be set after images load
-    let isLightTheme = false;
+    let showHandles = true;
     const handleSize = 24;
     // Store image paths
     const imagePaths = [
@@ -835,13 +835,12 @@ new (0, _p5Default.default)((sk)=>{
         setupGrid();
     };
     sk.draw = ()=>{
-        sk.background(isLightTheme ? 255 : 36);
+        sk.background(36);
         // Draw textured quads with images
         sk.noStroke();
         let imageIndex = 0;
         for(let row = 0; row < rows; row++)for(let col = 0; col < cols; col++){
             if (imageIndex < imageArray.length) {
-                // Apply tint based on theme (Option B: scale to cover, may distort slightly)
                 sk.tint(255);
                 sk.texture(imageArray[imageIndex]);
                 const topLeft = gridVertices[col][row];
@@ -852,29 +851,33 @@ new (0, _p5Default.default)((sk)=>{
             }
             imageIndex++;
         }
-        // Draw handles
-        sk.fill(0);
-        const pulseValue = (0, _utilsJs.pulse)(sk, 12, 18, 2);
-        for(let col = 1; col < cols; col++)for(let row = 1; row < rows; row++){
-            const vertex = gridVertices[col][row];
-            sk.ellipse(vertex.x, vertex.y, pulseValue, pulseValue);
-        }
-        // Update hovered handle
-        hoveredHandle = null;
-        const mouseX = sk.mouseX - sk.width / 2;
-        const mouseY = sk.mouseY - sk.height / 2;
-        for(let col = 1; col < cols; col++){
-            for(let row = 1; row < rows; row++){
+        // Draw handles only if showHandles is true
+        if (showHandles) {
+            sk.fill(0);
+            const pulseValue = (0, _utilsJs.pulse)(sk, 12, 18, 2);
+            for(let col = 1; col < cols; col++)for(let row = 1; row < rows; row++){
                 const vertex = gridVertices[col][row];
-                if (sk.dist(mouseX, mouseY, vertex.x, vertex.y) < handleSize) {
-                    hoveredHandle = {
-                        col,
-                        row
-                    };
-                    break;
-                }
+                sk.ellipse(vertex.x, vertex.y, pulseValue, pulseValue);
             }
-            if (hoveredHandle) break;
+        }
+        // Update hovered handle (only when handles are visible)
+        hoveredHandle = null;
+        if (showHandles) {
+            const mouseX = sk.mouseX - sk.width / 2;
+            const mouseY = sk.mouseY - sk.height / 2;
+            for(let col = 1; col < cols; col++){
+                for(let row = 1; row < rows; row++){
+                    const vertex = gridVertices[col][row];
+                    if (sk.dist(mouseX, mouseY, vertex.x, vertex.y) < handleSize) {
+                        hoveredHandle = {
+                            col,
+                            row
+                        };
+                        break;
+                    }
+                }
+                if (hoveredHandle) break;
+            }
         }
         // Update cursor
         if (draggedHandle) document.body.style.cursor = "grabbing";
@@ -903,7 +906,7 @@ new (0, _p5Default.default)((sk)=>{
         setupGrid();
     };
     sk.keyPressed = ()=>{
-        if (sk.key === "h" || sk.key === "H") isLightTheme = !isLightTheme;
+        if (sk.key === "h" || sk.key === "H") showHandles = !showHandles;
         if (sk.key === "s" || sk.key === "S") (0, _utilsJs.saveSnapshot)(sk, defaultDensity, 2);
     };
 });
@@ -33512,6 +33515,7 @@ let panel = null;
 let colsInput = null;
 let shuffleButton = null;
 let clearButton = null;
+let uploadButton = null;
 let imageUploadInput = null;
 let isOpen = false;
 function initSettings() {
@@ -33522,6 +33526,7 @@ function setupEventListeners() {
     colsInput = document.getElementById("cols-input");
     shuffleButton = document.getElementById("shuffle-button");
     clearButton = document.getElementById("clear-button");
+    uploadButton = document.getElementById("upload-button");
     imageUploadInput = document.getElementById("image-upload-input");
     const trigger = document.getElementById("settings-trigger");
     // Panel toggle
@@ -33536,6 +33541,8 @@ function setupEventListeners() {
     if (shuffleButton) shuffleButton.addEventListener("click", handleShuffle);
     // Clear button
     if (clearButton) clearButton.addEventListener("click", handleClear);
+    // Upload button
+    if (uploadButton) uploadButton.addEventListener("click", handleUploadButtonClick);
     // Image upload input
     if (imageUploadInput) imageUploadInput.addEventListener("change", handleImageUpload);
     // Close panel when clicking outside
@@ -33566,6 +33573,9 @@ function handleShuffle() {
 }
 function handleClear() {
     if (onClear) onClear();
+}
+function handleUploadButtonClick() {
+    if (imageUploadInput) imageUploadInput.click();
 }
 function handleImageUpload(e) {
     const files = Array.from(e.target.files);

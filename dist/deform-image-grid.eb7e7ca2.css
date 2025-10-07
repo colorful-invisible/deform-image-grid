@@ -159,19 +159,7 @@
 }
 
 #image-upload-input {
-  margin-bottom: .5rem;
-  padding: 0;
-}
-
-#image-upload-input::file-selector-button {
-  color: #fff;
-  cursor: pointer;
-  background: #000;
-  border: none;
-  border-radius: .25rem;
-  margin-right: .75rem;
-  padding: .5rem 1rem;
-  font-size: .75rem;
+  display: none;
 }
 
 #font-upload-input {
