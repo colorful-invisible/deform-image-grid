@@ -1,6 +1,6 @@
 # Deform Images
 
-![Deform Images Screenshot](./readme-images/deform-type.png)
+![Deform Images Screenshot](./readme-images/deform-image.png)
 
 A generative art project built with p5.js that allows you to interactively deform bitmap images on a grid by dragging handles.
 
